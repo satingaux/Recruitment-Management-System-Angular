@@ -1,0 +1,203 @@
+<mat-progress-bar style="top: 0; position: fixed; left: 0;" color = primary mode = indeterminate></mat-progress-bar>
+<!-- <mat-card > -->
+<h2 style="color: #000000;font-family: 'Montserrat', sans-serif; font-size: large;">
+  {{data.candidate.name}} Report ({{data.candidate.status}})
+</h2>
+<!-- <button mat-mini-fab color="default" (click)='removeCandidate(data.candidate)'>
+  <i class="material-icons" style="color: #F44336; font-size: 20px;">delete</i>
+</button> -->
+
+<mat-divider></mat-divider>
+
+<br>
+
+
+<mat-form-field style="margin-right: 280px; color: bisque;">
+  <mat-select [(ngModel)]="updatedstatus">
+    <mat-option value="interviewing">Interviewing</mat-option>
+    <mat-option value="selected">Selected</mat-option>
+    <mat-option value="onhold">Hold</mat-option>
+    <mat-option value="archived">Archive</mat-option>
+  </mat-select>
+  <mat-label> <b> Update Status </b> </mat-label>
+</mat-form-field>
+<button mat-raised-button color="default" (click)="updateStatus(data.candidate);" [disabled]="(updatedstatus === '')">Update Status</button>
+<br><br>
+
+<button mat-raised-button color="accent" (click)="addAnotherInterviewRound(data)">Add Another Interview Round</button><br><br>
+
+<!-- TABLE -->
+
+
+  <!-- <mat-accordion *ngFor = "let interview of interviews">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Interviewer {{interview.interviewer.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          Status: {{data.candidate.status}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <mat-card-content>
+          Interviewer Detals  <br>
+          {{interview.interviewer.email}} <br>
+          Contact Number: {{interview.interviewer.contactnumber}} <br>
+        </mat-card-content>
+        <mat-card>
+          Feedback:
+          <div *ngFor="let feedback of feedbacks">
+            <div *ngFor="let rating of feedback.feedback">{{rating.rating}}</div>
+            <button mat-raised-button color="warn" (click)='removeInterviewRound(interview, feedback)'>
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </mat-card>
+    </mat-expansion-panel>
+    <br>
+  </mat-accordion> -->
+  <mat-accordion *ngFor="let feedback of feedbacks">
+    <mat-expansion-panel>
+    <!-- <mat-expansion-panel (opened)="drawHistogram(feedback)"> -->
+      <mat-expansion-panel-header style="font-family: 'Montserrat', sans-serif;">
+        <mat-panel-title>
+          Interviewer {{feedback.interviewer.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <div *ngIf="!(feedback.feedback);">
+            Feedback: Pending
+          </div>
+          <div *ngIf="(feedback.feedback);">
+            Feedback: Recieved
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- <ng-template> -->
+        <mat-card-content style="font-family: 'Montserrat', sans-serif;">
+          <!-- {{feedback |json}} -->
+          <b>Interviewer Details: </b> {{feedback.interviewer.name}}/{{feedback.interviewer.email}} <br>
+          <b>Interview Date/Time: </b> {{feedback.interview_Date_Time.seconds*1000 | date: 'yyyy/MM/dd h:mm:ss a'}}
+          <mat-divider style="margin: 10px 0 20px 0;"></mat-divider>
+          <button mat-raised-button color="primary" *ngIf="!(feedback.feedback);" (click)="editInterview(feedback)">Reschedule/Edit</button>
+        </mat-card-content>
+
+
+
+
+
+
+
+        <!-- <button mat-raised-button (click)="drawHistogram(feedback)">Visualisation</button> -->
+        <!-- <google-chart
+          [title]= "title"
+          [type]="type"
+          [data]="feedbackObj"
+          [columnNames]= "histogram_columnames">
+        </google-chart> -->
+        <google-chart *ngIf="(feedback.feedback);" style="width: 100%; padding: 20px;"
+          [title]="title"
+          [type]="type"
+          [data]="feedbackObj"
+          [columnNames]="histogram_columnames">
+        </google-chart>
+
+
+
+
+
+        <!-- <div *ngFor="let x of feedbacks"> -->
+          <!-- <div class="" *ngFor="let x of feedback"> -->
+            <!-- <table cdk-table class = 'cdk-cell' *ngIf="feedback.feedback;" [dataSource]="feedback.feedback" >
+
+                <ng-container cdkColumnDef="Tech">
+                  <th cdk-header-cell *cdkHeaderCellDef> Tech </th>
+                  <td cdk-cell *cdkCellDef="let candidate">
+                        <mat-card mat-raised-button style="font-family: 'Montserrat', sans-serif;                        ">
+                          {{candidate.tech}}
+                        </mat-card>
+                  </td>
+                </ng-container>
+                <ng-container cdkColumnDef="Rating">
+                  <th cdk-header-cell *cdkHeaderCellDef style="min-width: 140px;"> Rating </th>
+                  <td cdk-cell *cdkCellDef="let candidate">
+                         <button mat-raised-button> -->
+                            <!-- {{candidate.rating}} -->
+                            <!-- <p-rating [ngModel]=candidate.rating [cancel]="false" [disabled]="true"></p-rating> -->
+                            <!-- </button> -->
+                  <!-- </td>
+                </ng-container>
+                <ng-container cdkColumnDef="comment">
+                  <th cdk-header-cell *cdkHeaderCellDef> Comment </th>
+                  <td cdk-cell *cdkCellDef="let candidate"> -->
+                        <!-- <button mat-raised-button> -->
+                            <!-- {{candidate.comment}} -->
+                        <!-- </button> -->
+                <!-- </td>
+                </ng-container>
+
+                <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+                <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+              </table> -->
+             <!-- </div> -->
+            <!-- </div> -->
+
+        <!-- <div *ngIf="feedback.feedback;">
+          <div *ngFor="let rating of feedback.feedback">
+            {{rating.rating}}
+          </div>
+        </div> -->
+      <!-- </mat-card> -->
+    </mat-expansion-panel>
+    <br>
+  </mat-accordion>
+
+<!-- </mat-card> -->
+
+<!--
+  <mat-expansion-panel *ngIf="data.candidate.status !== 'rejected'" #mep="matExpansionPanel" style="background-color:#F5F5F5;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Add Another Interview Round
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+      <form mat-dialog-content [formGroup]="form" style='text-align: center'>
+        <br>
+        <mat-form-field style="margin-right: 50px; width: 200px;">
+          <mat-label>Interviewers Available</mat-label>
+          <mat-select [(ngModel)]="report.interviewer" formControlName="interviewer">
+            <div *ngFor="let interviewer_i of interviewers">
+              <mat-option required  *ngIf="interviewer_i.profile === data.candidate.profile" [value]="interviewer_i" required>
+                {{interviewer_i.name}}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style=" width: 200px;">
+          <input matInput readonly formControlName="date" required [(ngModel)] = "report.date" [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <p-calendar  [(ngModel)]="report.scheduledTime" showTime="showTime" hourFormat="24"></p-calendar>
+
+        <mat-form-field style="margin-right: 50px;  width: 200px;">
+          <input matInput formControlName="scheduledTime" required [(ngModel)] = "report.scheduledTime" placeholder="time">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" style=" width: 200px;">
+          <textarea matInput formControlName="comment" [(ngModel)]="report.comment" placeholder="Comment"></textarea>
+        </mat-form-field>
+
+      </form>
+      <br>
+      <div class="" style="text-align: center;">
+        <mat-slide-toggle style="margin-right: 50px;">Send Email to Interviewer</mat-slide-toggle>
+        <mat-slide-toggle >Send Email to Candidate</mat-slide-toggle>
+        <br><br><br>
+        <button mat-raised-button color="primary" (click)="addInterviewRound(data.candidate); mep.expanded = false;" [disabled]="!(form.valid)">Submit</button>
+      </div>
+
+  </mat-expansion-panel> -->
+
