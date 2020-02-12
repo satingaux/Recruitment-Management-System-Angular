@@ -26,6 +26,7 @@ import {CalendarModule} from 'primeng/calendar';
 import { AddInterviewRoundDialogComponent } from './hr/add-interview-round-dialog/add-interview-round-dialog.component';
 import { EditInterviewRoundDialogComponent } from './hr/edit-interview-round-dialog/edit-interview-round-dialog.component';
 import { StatusReportDialogComponent } from './hr/status-report-dialog/status-report-dialog.component';
+import { GoogleChartComponent } from './google-chart/google-chart.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { StatusReportDialogComponent } from './hr/status-report-dialog/status-re
     AddInterviewRoundDialogComponent,
     EditInterviewRoundDialogComponent,
     StatusReportDialogComponent,
+    GoogleChartComponent,
   ],
   imports: [
     BrowserModule,
