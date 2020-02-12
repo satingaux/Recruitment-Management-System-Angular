@@ -20,7 +20,7 @@ export class HrComponent implements OnInit {
   constructor(private afs: AngularFirestore,
               private dialog: MatDialog,
               private snackbarService: SnackbarService) { }
-  private showLoader = true;
+  showLoader = true;
   activeStatus = 'all';
   activeProfile = 'all';
   displayedColumns: string[] = ['profile', 'name', 'experience', 'email', 'contactnumber', 'status', 'resume', 'export', 'archive'];

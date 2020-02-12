@@ -76,7 +76,7 @@
         <mat-card-content style="font-family: 'Montserrat', sans-serif;">
           <!-- {{feedback |json}} -->
           <b>Interviewer Details: </b> {{feedback.interviewer.name}}/{{feedback.interviewer.email}} <br>
-          <!-- <b>Interview Date/Time: </b> {{feedback.interview_Date_Time.seconds*1000 | date: 'yyyy/MM/dd h:mm:ss a'}} -->
+          <b>Interview Date/Time: </b> {{feedback.interview_Date_Time}}
           <mat-divider style="margin: 10px 0 20px 0;"></mat-divider>
           <button mat-raised-button color="primary" *ngIf="!(feedback.feedback);" (click)="editInterview(feedback)">Reschedule/Edit</button>
         </mat-card-content>

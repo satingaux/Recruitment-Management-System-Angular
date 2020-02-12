@@ -27,6 +27,10 @@ import { AddInterviewRoundDialogComponent } from './hr/add-interview-round-dialo
 import { EditInterviewRoundDialogComponent } from './hr/edit-interview-round-dialog/edit-interview-round-dialog.component';
 import { StatusReportDialogComponent } from './hr/status-report-dialog/status-report-dialog.component';
 import { GoogleChartComponent } from './google-chart/google-chart.component';
+import { AllInterviewsListComponent } from './all-interviews-list/all-interviews-list.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { GoogleChartComponent } from './google-chart/google-chart.component';
     EditInterviewRoundDialogComponent,
     StatusReportDialogComponent,
     GoogleChartComponent,
+    AllInterviewsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,9 @@ import { GoogleChartComponent } from './google-chart/google-chart.component';
     NgxMaterialTimepickerModule,
     NgbModule,
     CalendarModule,
+    AppRoutingModule,
+    HttpClientModule,
+    DeviceDetectorModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule, // dynamically imports firebase/analytics
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

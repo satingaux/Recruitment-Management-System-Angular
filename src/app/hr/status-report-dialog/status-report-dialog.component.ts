@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddInterviewRoundDialogComponent } from '../add-interview-round-dialog/add-interview-round-dialog.component';
 import { EditInterviewRoundDialogComponent } from '../edit-interview-round-dialog/edit-interview-round-dialog.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-status-report-dialog',
@@ -65,6 +66,9 @@ export class StatusReportDialogComponent implements OnInit {
     .subscribe(
       feedbacks => {
         this.feedbacks = feedbacks;
+        feedbacks.forEach( (e: any) => {
+          e.interview_Date_Time = moment.unix(e.interview_Date_Time.seconds).format("MMMM Do YYYY, h:mm:ss a");
+        });
     });
   }
 

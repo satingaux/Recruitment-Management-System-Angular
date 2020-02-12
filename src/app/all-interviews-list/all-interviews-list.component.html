@@ -1,0 +1,87 @@
+
+<!--From here table is started-->
+<mat-card style="min-width: 1100px;">
+  <mat-card-title>
+    <h3 style="text-align: center; margin-right: 40px; font-family: 'Zilla Slab', sans-serif;">
+      All Interviews List
+    </h3>
+    <mat-divider></mat-divider>
+  </mat-card-title>
+  <mat-card-header>
+    <button mat-mini-fab style="margin: auto;" color="default" [routerLink]="['']"><mat-icon>arrow_back</mat-icon></button>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" style="letter-spacing: 2px; font-size: 18px;" placeholder="Search" >
+    </mat-form-field>
+    <button mat-raised-button style="margin: auto; height: 40px;" (click)="toBeInterviews()">Upcoming Interviews</button>
+    <button mat-raised-button style="margin: auto; height: 40px;" (click)="outDatedInterviews()">Expired Interviews</button>
+  </mat-card-header>
+  <br>
+<table cdk-table class = 'cdk-cell' [dataSource]="datasource"  style="width: 96%; margin-left: 34px;" >
+<!-- this is profile section -->
+  <ng-container cdkColumnDef="profile">
+    <th cdk-header-cell *cdkHeaderCellDef> Profile </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+            {{interviews.profile}}
+    </td>
+  </ng-container>
+<!-- this is name section -->
+  <ng-container cdkColumnDef="name" >
+    <th cdk-header-cell *cdkHeaderCellDef > Name </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+              {{interviews.name}}
+    </td>
+  </ng-container>
+<!-- this is experience section -->
+  <ng-container cdkColumnDef="experience">
+    <th cdk-header-cell *cdkHeaderCellDef> Experience </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+              {{interviews.experience}}
+  </td>
+  </ng-container>
+<!-- this is email section -->
+  <ng-container cdkColumnDef="email">
+    <th cdk-header-cell *cdkHeaderCellDef > Email </th>
+    <td cdk-cell *cdkCellDef="let interviews">
+              {{interviews.email}}
+  </td>
+  </ng-container>
+<!-- this is Contact Number section -->
+  <ng-container cdkColumnDef="contactnumber">
+    <th cdk-header-cell *cdkHeaderCellDef > Phone </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+              {{interviews.contactnumber}}
+  </td>
+  </ng-container>
+  <ng-container cdkColumnDef="Date/Time">
+    <th cdk-header-cell *cdkHeaderCellDef > Date/Time </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+              {{interviews.interview_Date_Time}}
+  </td>
+  </ng-container>
+<!-- this is Resume section -->
+  <ng-container cdkColumnDef="resume">
+    <th cdk-header-cell *cdkHeaderCellDef > Resume </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+          <div mat-raised-button>
+              <a [href]="interviews.resume" target="_blank">
+                <i  style="cursor: pointer;" class="material-icons" style="color: #5F7FFF; font-size: 25px;">file_present</i>
+              </a>
+            </div>
+    </td>
+  </ng-container>
+<!-- this is feedback section -->
+  <ng-container cdkColumnDef="feedback">
+    <th cdk-header-cell *cdkHeaderCellDef > feedback </th>
+    <td cdk-cell *cdkCellDef="let interviews" style="text-transform: capitalize;">
+          <mat-icon  style="cursor: pointer; font-size: 25px;"  [ngStyle]="{'color':interviews.feedbackStatus == 'feedbackPending'? 'grey' : 'green' }" (click) = "showReport(interviews)">
+              feedback
+          </mat-icon>
+    </td>
+  </ng-container>
+<!-- header row is attached to the table  -->
+  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+  <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</mat-card>

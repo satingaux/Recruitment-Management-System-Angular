@@ -1,129 +1,143 @@
 <link href="https://fonts.googleapis.com/css?family=Manjari:400,700|Playfair+Display|Zilla+Slab:600&display=swap" rel="stylesheet">
 
-<mat-form-field style="margin-right: 20px;">
-  <input matInput (keyup)="applyFilter($event.target.value);" placeholder="Search Item">
-</mat-form-field>
 
-<mat-form-field style="margin-right: 20px;">
-  <mat-label>Technology</mat-label>
-    <mat-select [(value)]="selected" (selectionChange)="orderBy($event.value); showLoader = true;">
-      <mat-option value="all">All</mat-option>
-      <mat-option value="backend">Backend</mat-option>
-      <mat-option value="frontend">FrontEnd</mat-option>
-      <mat-option value="fullstack">Fullstack</mat-option>
-      <mat-option value="other">Other</mat-option>
-  </mat-select>
-</mat-form-field>
+<mat-card>
+  <mat-card-title>
+    <h3 style="text-align: center; margin-right: 40px; font-family: 'Zilla Slab', sans-serif;">
+      Candidates List
+    </h3>
+  </mat-card-title>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <mat-form-field style="margin-right: 20px;">
+      <input matInput (keyup)="applyFilter($event.target.value);" placeholder="Search Item">
+    </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Status</mat-label>
-  <mat-select [(value)]="selectedStatusChip" (selectionChange)="orderByStatus($event.value); showLoader = true;">
-    <mat-option value="all">All</mat-option>
-    <mat-option value="interviewing">Interviewing</mat-option>
-    <mat-option value="onhold">Hold</mat-option>
-    <mat-option value="selected">Selected</mat-option>
-    <mat-option value="archived">Archived</mat-option>
-  </mat-select>
-</mat-form-field>
+    <mat-form-field style="margin-right: 20px;">
+      <mat-label>Technology</mat-label>
+        <mat-select [(value)]="selected" (selectionChange)="orderBy($event.value); showLoader = true;">
+          <mat-option value="all">All</mat-option>
+          <mat-option value="backend">Backend</mat-option>
+          <mat-option value="frontend">FrontEnd</mat-option>
+          <mat-option value="fullstack">Fullstack</mat-option>
+          <mat-option value="other">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
 
+    <mat-form-field style="margin-right: 20px;">
+      <mat-label>Status</mat-label>
+      <mat-select [(value)]="selectedStatusChip" (selectionChange)="orderByStatus($event.value); showLoader = true;">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="interviewing">Interviewing</mat-option>
+        <mat-option value="onhold">Hold</mat-option>
+        <mat-option value="selected">Selected</mat-option>
+        <mat-option value="archived">Archived</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-
-<div class="" style="right: 0px; top: 85px; position: absolute;">
-  <app-add></app-add>
-</div>
-<br>
-
-<table cdk-table [dataSource]="datasource" matSort>
-
-  <ng-container cdkColumnDef="profile">
-    <th cdk-header-cell *cdkHeaderCellDef> Profile </th>
-    <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
-       <b> {{candidate.profile}} </b>
-    </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="name">
-    <th cdk-header-cell *cdkHeaderCellDef mat-sort-header> Name </th>
-    <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
-        {{candidate.name}}
-    </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="experience">
-    <th cdk-header-cell *cdkHeaderCellDef mat-sort-header> Experience </th>
-    <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
-      {{candidate.experience}} yrs
-  </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="email">
-    <th cdk-header-cell *cdkHeaderCellDef> Email </th>
-    <td cdk-cell *cdkCellDef="let candidate">
-        {{candidate.email}}
-  </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="contactnumber">
-    <th cdk-header-cell *cdkHeaderCellDef> Phone </th>
-    <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
-      {{candidate.contactnumber}}
-  </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="status">
-    <th cdk-header-cell *cdkHeaderCellDef> Status </th>
-    <td cdk-cell *cdkCellDef="let candidate" class="statusButton" (click) = "showReport(candidate)" style="text-transform: capitalize;">
-
-        <div *ngIf="candidate.status === 'archived'">
-          <b style="cursor: pointer; color: #FF0C6C">{{candidate.status}}</b>
-        </div>
-        <div *ngIf="candidate.status === 'selected'">
-          <b style="cursor: pointer; color: #03DAC6">{{candidate.status}}</b>
-        </div>
-        <div *ngIf="candidate.status === 'interviewing'">
-          <b style="cursor: pointer; color: #5F7FFF">{{candidate.status}}</b>
-        </div>
-        <div *ngIf="candidate.status === 'onhold'">
-          <b style="cursor: pointer; color: #00000">{{candidate.status}}</b>
-        </div>
-    </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="resume">
-    <th cdk-header-cell *cdkHeaderCellDef> Resume </th>
-    <td cdk-cell *cdkCellDef="let candidate">
-        <a [href]="candidate.resumeurl" target="_blank">
-          <i  style="cursor: pointer;" class="material-icons" style="color: #5F7FFF; font-size: 20px;">file_present</i>
-        </a>
-    </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="export">
-    <th cdk-header-cell *cdkHeaderCellDef> Export </th>
-    <td cdk-cell *cdkCellDef="let candidate">
-       <a style="cursor: pointer; ">
-        <i (click)="exportData(candidate)" class="material-icons" style="color: #5F7FFF; font-size: 20px;">folder_shared</i>
-       </a>
-    </td>
-  </ng-container>
-
-  <ng-container cdkColumnDef="archive">
-    <th cdk-header-cell *cdkHeaderCellDef> Archive </th>
-    <td cdk-cell *cdkCellDef="let candidate">
-        <a style="cursor: pointer; ">
-          <i (click)='archiveCandidate(candidate)' class="material-icons" style="color: #F44336; font-size: 20px;">delete</i>
-        </a>
-    </td>
-  </ng-container>
+    <button mat-raised-button style="margin: auto;" [routerLink]="['/allinterviews']"><span>All Interviews List</span></button>
 
 
-  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-  <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+    <div class="" style="right: 0px; top: 85px; position: absolute;">
+      <app-add></app-add>
+    </div>
+    <br>
+    <mat-progress-bar *ngIf="showLoader" mode="query"></mat-progress-bar>
 
-</table>
+    <table cdk-table [dataSource]="datasource" matSort>
 
-<mat-paginator [pageSizeOptions]="[10, 25, 50, 75, 100]"></mat-paginator>
+      <ng-container cdkColumnDef="profile">
+        <th cdk-header-cell *cdkHeaderCellDef> Profile </th>
+        <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
+           <b> {{candidate.profile}} </b>
+        </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="name">
+        <th cdk-header-cell *cdkHeaderCellDef mat-sort-header> Name </th>
+        <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
+            {{candidate.name}}
+        </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="experience">
+        <th cdk-header-cell *cdkHeaderCellDef mat-sort-header> Experience </th>
+        <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
+          {{candidate.experience}} yrs
+      </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="email">
+        <th cdk-header-cell *cdkHeaderCellDef> Email </th>
+        <td cdk-cell *cdkCellDef="let candidate">
+            {{candidate.email}}
+      </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="contactnumber">
+        <th cdk-header-cell *cdkHeaderCellDef> Phone </th>
+        <td cdk-cell *cdkCellDef="let candidate" style="text-transform: capitalize;">
+          {{candidate.contactnumber}}
+      </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="status">
+        <th cdk-header-cell *cdkHeaderCellDef> Status </th>
+        <td cdk-cell *cdkCellDef="let candidate" class="statusButton" (click) = "showReport(candidate)" style="text-transform: capitalize;">
+
+            <div *ngIf="candidate.status === 'archived'">
+              <b style="cursor: pointer; color: #FF0C6C">{{candidate.status}}</b>
+            </div>
+            <div *ngIf="candidate.status === 'selected'">
+              <b style="cursor: pointer; color: #03DAC6">{{candidate.status}}</b>
+            </div>
+            <div *ngIf="candidate.status === 'interviewing'">
+              <b style="cursor: pointer; color: #5F7FFF">{{candidate.status}}</b>
+            </div>
+            <div *ngIf="candidate.status === 'onhold'">
+              <b style="cursor: pointer; color: #000000">{{candidate.status}}</b>
+            </div>
+        </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="resume">
+        <th cdk-header-cell *cdkHeaderCellDef> Resume </th>
+        <td cdk-cell *cdkCellDef="let candidate">
+            <a [href]="candidate.resumeurl" target="_blank">
+              <i  style="cursor: pointer;" class="material-icons" style="color: #5F7FFF; font-size: 20px;">file_present</i>
+            </a>
+        </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="export">
+        <th cdk-header-cell *cdkHeaderCellDef> Export </th>
+        <td cdk-cell *cdkCellDef="let candidate">
+           <a style="cursor: pointer; ">
+            <i (click)="exportData(candidate)" class="material-icons" style="color: #5F7FFF; font-size: 20px;">folder_shared</i>
+           </a>
+        </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="archive">
+        <th cdk-header-cell *cdkHeaderCellDef> Archive </th>
+        <td cdk-cell *cdkCellDef="let candidate">
+            <a style="cursor: pointer; ">
+              <i (click)='archiveCandidate(candidate)' class="material-icons" style="color: #F44336; font-size: 20px;">delete</i>
+            </a>
+        </td>
+      </ng-container>
 
 
-<mat-progress-bar *ngIf="showLoader" mode="query"></mat-progress-bar>
+      <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+      <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
 
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 75, 100]"></mat-paginator>
+
+
+
+
+  </mat-card-content>
+</mat-card>

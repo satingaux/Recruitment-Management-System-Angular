@@ -19,6 +19,7 @@ export class AddInterviewRoundDialogComponent implements OnInit {
     c_time_stamp: '',
     i_docId: '',
     i_time_stamp: '',
+    feedbackStatus: 'feedbackPending',
     time_stamp: Date(),
     mode: '',  //online or offline
     tech_or_hr: '',
