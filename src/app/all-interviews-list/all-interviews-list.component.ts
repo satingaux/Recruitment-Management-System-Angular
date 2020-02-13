@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./all-interviews-list.component.css']
 })
 export class AllInterviewsListComponent implements OnInit {
-
+  selectedStatusforInterviews = '';
   datasource: any;
   user: any;
   emailOfInterviewer;
@@ -40,7 +40,7 @@ export class AllInterviewsListComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   ngOnInit() {
 
-  this.afs.collection('interviews', ref => ref.where("interview_Date_Time", ">", new Date()).orderBy('interview_Date_Time', 'asc')).valueChanges()
+  this.afs.collection('interviews', ref => ref.where('interview_Date_Time', '>', new Date()).orderBy('interview_Date_Time', 'asc')).valueChanges()
     .subscribe(
       interviews => {
         this.interviews = interviews;
@@ -137,42 +137,40 @@ export class AllInterviewsListComponent implements OnInit {
     }
   }
 
-  outDatedInterviews() {
-    this.afs.collection('interviews', ref => ref.where("interview_Date_Time", "<", new Date()).orderBy('interview_Date_Time', 'asc')).valueChanges()
-    .subscribe(
-      interviews => {
-        this.interviews = interviews;
-        console.log(interviews);
-        interviews.forEach( (e: any) => {
-          e.interview_Date_Time = moment.unix(e.interview_Date_Time.seconds).format('MMMM Do YYYY, h:mm:ss a');
-        });
-        const a = [];
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < this.interviews.length; i++) {
-          a.push({name: this.interviews[i].candidate.name,
-                  profile: this.interviews[i].candidate.profile,
-                  experience: this.interviews[i].candidate.experience,
-                  email: this.interviews[i].candidate.email,
-                  contactnumber: this.interviews[i].candidate.contactnumber,
-                  resume: this.interviews[i].candidate.resumeurl,
-                  interview_Date_Time: this.interviews[i].interview_Date_Time,
-                  status: this.interviews[i].candidate.status,
-                  feedbackStatus: this.interviews[i].feedbackStatus,
-                  docId: this.interviews[i].docId} );
-      }
+  orderInterviewsByStatus(status) {
+    if (status === 'toBeInterviews') {
+      this.ngOnInit();
+    } else if (status === 'outDatedInterviews') {
+      this.afs.collection('interviews', ref => ref.where('interview_Date_Time', '<', new Date())
+          .orderBy('interview_Date_Time', 'asc')).valueChanges()
+          .subscribe(
+            interviews => {
+              this.interviews = interviews;
+              console.log(interviews);
+              interviews.forEach( (e: any) => {
+                e.interview_Date_Time = moment.unix(e.interview_Date_Time.seconds).format('MMMM Do YYYY, h:mm:ss a');
+              });
+              const a = [];
+              // tslint:disable-next-line: prefer-for-of
+              for (let i = 0; i < this.interviews.length; i++) {
+                a.push({name: this.interviews[i].candidate.name,
+                        profile: this.interviews[i].candidate.profile,
+                        experience: this.interviews[i].candidate.experience,
+                        email: this.interviews[i].candidate.email,
+                        contactnumber: this.interviews[i].candidate.contactnumber,
+                        resume: this.interviews[i].candidate.resumeurl,
+                        interview_Date_Time: this.interviews[i].interview_Date_Time,
+                        status: this.interviews[i].candidate.status,
+                        feedbackStatus: this.interviews[i].feedbackStatus,
+                        docId: this.interviews[i].docId} );
+            }
 
-        this.datasource = new MatTableDataSource( a );
-        this.datasource.paginator = this.paginator;
-        this.datasource.sort = this.sort;
-    });
-  }
-
-  toBeInterviews() {
-    this.ngOnInit();
+              this.datasource = new MatTableDataSource( a );
+              this.datasource.paginator = this.paginator;
+              this.datasource.sort = this.sort;
+          });
+    } else {
+      this.snackbarservice.openSnackBar('Under development :)', 'close');
+    }
   }
 }
-
-// -------------------------------------------------------------
-// Dialog component ----------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------
-

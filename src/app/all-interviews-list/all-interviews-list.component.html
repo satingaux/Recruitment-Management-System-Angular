@@ -1,21 +1,22 @@
 
-<!--From here table is started-->
 <mat-card style="min-width: 1100px;">
-  <mat-card-title>
-    <h3 style="text-align: center; margin-right: 40px; font-family: 'Zilla Slab', sans-serif;">
-      All Interviews List
-    </h3>
-    <mat-divider></mat-divider>
-  </mat-card-title>
   <mat-card-header>
-    <button mat-mini-fab style="margin: auto;" color="default" [routerLink]="['']"><mat-icon>arrow_back</mat-icon></button>
-    <mat-form-field>
+
+    <mat-form-field style="margin-right: 50px;">
       <input matInput (keyup)="applyFilter($event.target.value)" style="letter-spacing: 2px; font-size: 18px;" placeholder="Search" >
     </mat-form-field>
-    <button mat-raised-button style="margin: auto; height: 40px;" (click)="toBeInterviews()">Upcoming Interviews</button>
-    <button mat-raised-button style="margin: auto; height: 40px;" (click)="outDatedInterviews()">Expired Interviews</button>
+
+    <mat-form-field>
+      <mat-label>Sort Interviews</mat-label>
+      <mat-select [(value)]="selectedStatusforInterviews" (selectionChange)="orderInterviewsByStatus($event.value);">
+        <mat-option value="toBeInterviews">Upcoming Interviews</mat-option>
+        <mat-option value="interviewing">Interviews Done</mat-option>
+        <mat-option value="outDatedInterviews">Interview Expired</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </mat-card-header>
-  <br>
+  <!-- <br> -->
 <table cdk-table class = 'cdk-cell' [dataSource]="datasource"  style="width: 96%; margin-left: 34px;" >
 <!-- this is profile section -->
   <ng-container cdkColumnDef="profile">
