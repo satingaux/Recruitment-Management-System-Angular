@@ -153,15 +153,16 @@ export class StatusReportDialogComponent implements OnInit {
 
 
   drawHistogram(interview) {
-    this.feedbackObj = [];
-    this.histogram_columnames = [];
-    interview.feedback.forEach(element => {
-      this.feedbackObj.push([element.tech, Number(element.rating)]);
-    });
-    this.histogram_columnames.push('Technology');
-    this.histogram_columnames.push('Rating');
-
-    console.log(this.feedbackObj);
+    if (interview.feedback) {
+      this.feedbackObj = [];
+      this.histogram_columnames = [];
+      interview.feedback.forEach(element => {
+        this.feedbackObj.push([element.tech, Number(element.rating)]);
+      });
+      this.histogram_columnames.push('Technology');
+      this.histogram_columnames.push('Rating');
+      // console.log(this.feedbackObj);
+    }
   }
 
   addAnotherInterviewRound(data) {

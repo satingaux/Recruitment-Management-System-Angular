@@ -24,7 +24,7 @@
 <button mat-raised-button color="default" (click)="updateStatus(data.candidate);" [disabled]="(updatedstatus === '')">Update Status</button>
 <br><br>
 
-<button mat-raised-button color="accent" (click)="addAnotherInterviewRound(data)">Add Another Interview Round</button><br><br>
+<button mat-raised-button color="default" (click)="addAnotherInterviewRound(data)">Add Another Interview Round</button><br><br>
 
 <!-- TABLE -->
 
@@ -57,8 +57,8 @@
     <br>
   </mat-accordion> -->
   <mat-accordion *ngFor="let feedback of feedbacks">
-    <mat-expansion-panel>
-    <!-- <mat-expansion-panel (opened)="drawHistogram(feedback)"> -->
+    <!-- <mat-expansion-panel> -->
+    <mat-expansion-panel (opened)="drawHistogram(feedback)">
       <mat-expansion-panel-header style="font-family: 'Montserrat', sans-serif;">
         <mat-panel-title>
           Interviewer {{feedback.interviewer.name}}
