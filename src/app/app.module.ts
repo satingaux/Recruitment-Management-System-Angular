@@ -31,6 +31,17 @@ import { AllInterviewsListComponent } from './all-interviews-list/all-interviews
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { UpdatesComponent } from './updates/updates.component';
+import { SideNavUpdatesComponent } from './updates/side-nav-updates/side-nav-updates.component';
+import { AuthComponent } from './auth/auth.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ChatsComponent } from './updates/chats/chats.component';
+import { AllUpdatesComponent } from './updates/all-updates/all-updates.component';
+
+import { CovalentCommonModule, CovalentLayoutModule, CovalentMediaModule, CovalentExpansionPanelModule,
+  CovalentStepsModule, CovalentLoadingModule, CovalentDialogsModule, CovalentSearchModule, CovalentPagingModule,
+  CovalentNotificationsModule, CovalentMenuModule, CovalentDataTableModule, CovalentMessageModule } from '@covalent/core';
 
 @NgModule({
   declarations: [
@@ -44,6 +55,13 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     StatusReportDialogComponent,
     GoogleChartComponent,
     AllInterviewsListComponent,
+    SideNavComponent,
+    UpdatesComponent,
+    SideNavUpdatesComponent,
+    AuthComponent,
+    ToolbarComponent,
+    ChatsComponent,
+    AllUpdatesComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +70,19 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     DemoMaterialModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    CovalentCommonModule,
+    CovalentLayoutModule,
+    CovalentMediaModule,
+    CovalentExpansionPanelModule,
+    CovalentStepsModule,
+    CovalentDialogsModule,
+    CovalentLoadingModule,
+    CovalentSearchModule,
+    CovalentPagingModule,
+    CovalentNotificationsModule,
+    CovalentMenuModule,
+    CovalentDataTableModule,
+    CovalentMessageModule,
     FormsModule,
     RatingModule,
     GoogleChartsModule,
