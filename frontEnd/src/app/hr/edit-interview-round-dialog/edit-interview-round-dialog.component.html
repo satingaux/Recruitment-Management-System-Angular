@@ -1,0 +1,62 @@
+<h3>Reschedule Interview Round</h3>
+<form mat-dialog-content [formGroup]="form">
+  <br>
+  <mat-form-field style="margin-right: 50px;">
+    <mat-label>Select mode of Interview</mat-label>
+    <mat-select formControlName="mode" [(ngModel)]="roundReport.mode" required>
+      <mat-option value="online">Online</mat-option>
+      <mat-option value="offline">Offline</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select type of Interview</mat-label>
+    <mat-select formControlName="tech_or_hr" [(ngModel)]="roundReport.tech_or_hr" required>
+      <mat-option value="technical">Technical</mat-option>
+      <mat-option value="nontechnical">Non-Technical</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br><br>
+  <p-calendar appendTo="body" formControlName="interview_Date_Time" [(ngModel)]="roundReport.interview_Date_Time" showTime="showTime" hourFormat="12" placeholder="{{this.data.interview_arg.interview_Date_Time}}"></p-calendar>
+
+
+  <mat-form-field *ngIf="roundReport.tech_or_hr === 'nontechnical'" style="margin-left: 50px;">
+    <mat-label> {{roundReport.interviewer.name}}</mat-label>
+    <mat-select [(ngModel)]="roundReport.interviewer" formControlName="interviewer">
+      <div *ngFor="let interviewer_i of interviewers">
+        <mat-option required  *ngIf="interviewer_i.profile === 'nontechnical'" [value]="interviewer_i" required>
+          {{interviewer_i.name}}
+        </mat-option>
+      </div>
+    </mat-select>
+    <!-- <mat-hint>{{roundReport.interviewer.name}}</mat-hint> -->
+  </mat-form-field>
+
+  <mat-form-field *ngIf="roundReport.tech_or_hr === 'technical'" style="margin-left: 50px;">
+    <mat-label>{{roundReport.interviewer.name}}</mat-label>
+    <mat-select [(ngModel)]="roundReport.interviewer" formControlName="interviewer">
+      <div *ngFor="let interviewer_i of interviewers">
+        <mat-option required  *ngIf="interviewer_i.profile === data.interview_arg.candidate.profile" [value]="interviewer_i" required>
+          {{interviewer_i.name}}
+        </mat-option>
+      </div>
+    </mat-select>
+    <!-- <mat-hint>{{roundReport.interviewer.name}}</mat-hint> -->
+  </mat-form-field>
+
+  <br><br>
+  <mat-form-field class="example-full-width" style=" width: 100%">
+    <textarea matInput formControlName="comment" [(ngModel)]="roundReport.comment" placeholder="Remarks"></textarea>
+  </mat-form-field>
+
+
+
+</form>
+<br>
+<div style="text-align: center;">
+  <mat-slide-toggle style="margin-right: 50px;">Email-Interviewer</mat-slide-toggle>
+  <mat-slide-toggle >Email-Candidate</mat-slide-toggle>
+  <br><br><br>
+  <button mat-raised-button color="primary" (click)="updateInterviewRound(data.interview_arg.candidate);" [disabled]="!(form.valid)">Update</button>
+</div>

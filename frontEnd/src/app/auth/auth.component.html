@@ -1,0 +1,19 @@
+<div class="background">
+  <div class="">
+    <mat-card style="min-height: 40vh; min-width: 30vw;">
+      <mat-card-title style="text-align: center; font-size: 3em; font-weight: 500;">Hire.</mat-card-title>
+      <div style="height: 10rem; display: grid; align-items: center; justify-content:center;">
+        <button mat-raised-button *ngIf="firebaseService.isLoggedIn();" (click)="loginWithGoogle()" style="padding: 1rem;">
+          <img src="../../assets/search.svg" alt="G" style="width: 50px; height:30px">
+                Sign in with Google
+        </button>
+        <div *ngIf="!firebaseService.isLoggedIn()">
+          <button mat-raised-button (click)="signOut()" style="padding: 1rem; color: red;">
+            Sign out
+          </button>
+        </div>
+      </div>
+      <mat-card-footer style="background-color: #000; min-height: 5vh;"></mat-card-footer>
+    </mat-card>
+  </div>
+</div>
