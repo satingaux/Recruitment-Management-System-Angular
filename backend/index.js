@@ -21,14 +21,17 @@ var addrecord=require('./db_files/add_records')
 app.get('/addStudentRecord',function(req,res){
 	//call to auth file for authentication
 	//frontend fields like - <input type="text" name="name">
-	fname=request.body.fname;
-	lname=request.body.lname;
-	email=request.body.email;
-	address=request.body.address;
-	contact_details=request.body.contact_details;
-	position=request.body.position;
+	fname=req.body.fname;
+	lname=req.body.lname;
+	email=req.body.email;
+	address=req.body.address;
+	contact_details=req.body.contact_details;
+	position=req.body.position;
 	var r=addrecord.addStudentRecord(fname,lname,email,address,contact_details,position);
 });
 
 var fetchrecord=require('./db_files/fetch_record')
 app.get('/fetchAllStudentRecord',fetchrecord.fetchAllStudentRecord);
+
+app.get('/fetchSortedRecord',fetchrecord.fetchSorted);
+app.get('/fetchSpecificRecord',fetchrecord.fetchSpecificRecord);
