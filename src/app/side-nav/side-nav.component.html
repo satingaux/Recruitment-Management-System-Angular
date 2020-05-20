@@ -2,7 +2,7 @@
   <button mat-icon-button matTooltip="Application Menu" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
   </button>
-  <span style="font-weight: 200;">Hire - Sachin Sharma</span>
+  <h1 routerLink="" style="margin-left: 10px; cursor: pointer;">Hire - Sachin Sharma</h1>
   <span style="flex: 1 1 auto;"></span>
 
   <button mat-icon-button  (click)="openSearch()">
@@ -54,16 +54,16 @@
             <mat-icon style="margin-right: 10px;">inbox</mat-icon>
             Updates
           </mat-list-item>
-          <mat-list-item routerLinkActive routerLink="allinterviews" (click)="sidenav.close()"><mat-icon style="margin-right: 10px;">people_alt</mat-icon>Applicants</mat-list-item>
-          <mat-list-item routerLink="#" (click)="sidenav.close()"><mat-icon style="margin-right: 10px;">business_center</mat-icon>Jobs</mat-list-item>
-          <mat-list-item routerLink="#" (click)="sidenav.close()"><mat-icon style="margin-right: 10px;">perm_contact_calender</mat-icon>Calender</mat-list-item>
+          <mat-list-item routerLinkActive routerLink="" (click)="sidenav.close()"><mat-icon style="margin-right: 10px;">people_alt</mat-icon>Applicants</mat-list-item>
+          <mat-list-item routerLink="" (click)="sidenav.close()"><mat-icon style="margin-right: 10px;">business_center</mat-icon>Jobs</mat-list-item>
+          <mat-list-item routerLink="" (click)="sidenav.close()"><mat-icon style="margin-right: 10px;">perm_contact_calender</mat-icon>Calender</mat-list-item>
           <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
               <mat-expansion-panel-header>
                   Preference
               </mat-expansion-panel-header>
               <mat-nav-list dense>
-                  <a mat-list-item routerLink="#"><mat-icon>attach_money</mat-icon>Billing</a>
-                  <a mat-list-item routerLink="#"><mat-icon>notification_important</mat-icon>Notification</a>
+                  <a mat-list-item routerLink=""><mat-icon>attach_money</mat-icon>Billing</a>
+                  <a mat-list-item routerLink=""><mat-icon>notification_important</mat-icon>Notification</a>
               </mat-nav-list>
           </mat-expansion-panel>
           <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
@@ -71,8 +71,8 @@
                   Privacy
               </mat-expansion-panel-header>
               <mat-nav-list dense>
-                  <a mat-list-item routerLink="#"><mat-icon>person_add</mat-icon>Partnership Request</a>
-                  <a mat-list-item routerLink="#"><mat-icon>visibility</mat-icon>Profile Visibility</a>
+                  <a mat-list-item routerLink=""><mat-icon>person_add</mat-icon>Partnership Request</a>
+                  <a mat-list-item routerLink=""><mat-icon>visibility</mat-icon>Profile Visibility</a>
               </mat-nav-list>
           </mat-expansion-panel>
       </mat-nav-list>

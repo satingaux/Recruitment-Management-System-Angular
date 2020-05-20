@@ -27,10 +27,10 @@ export class AllUpdatesComponent implements OnInit {
         isMarkedWithFlag: true,
         name: 'Bhumika Pruthi',
         time: '9:00 pm',
-        profile: 'Tech Lead',
+        profile: 'Business Lead',
       },
       activity: {
-        title: 'Email',
+        title: 'Email Attachment',
         // desc: 'email from Jhanvi',
         msg: 'This is the email send by Bhumika',
       }
@@ -39,12 +39,12 @@ export class AllUpdatesComponent implements OnInit {
       candidate: {
         id: '7623u45298476234',
         isMarkedWithFlag: false,
-        name: 'Bhumika Pruthi',
+        name: 'Rohan Kumar',
         time: '9:00 pm',
-        profile: 'Tech Lead',
+        profile: 'Design Lead',
       },
       activity: {
-        title: 'Email',
+        title: 'Confirmation',
         // desc: 'email from Jhanvi',
         msg: 'This is the email send by Bhumika',
       }
@@ -53,12 +53,12 @@ export class AllUpdatesComponent implements OnInit {
       candidate: {
         id: '7623u45298476234',
         isMarkedWithFlag: false,
-        name: 'Bhumika Pruthi',
+        name: 'Jaydeep Sangwaan',
         time: '9:00 pm',
-        profile: 'Tech Lead',
+        profile: 'Tech Intern',
       },
       activity: {
-        title: 'Email',
+        title: 'Acceptance',
         // desc: 'email from Jhanvi',
         msg: 'This is the email send by Bhumika',
       }
@@ -67,7 +67,7 @@ export class AllUpdatesComponent implements OnInit {
       candidate: {
         id: '7623u45298476234',
         isMarkedWithFlag: false,
-        name: 'Bhumika Pruthi',
+        name: 'Samuel Sharma',
         time: '9:00 pm',
         profile: 'Tech Lead',
       },

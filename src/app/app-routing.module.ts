@@ -32,6 +32,10 @@ const routes: Routes = [
         {
           path: 'chats',
           component: ChatsComponent
+        },
+        {
+          path: 'important',
+          component: ChatsComponent
         }
       ]
     },
